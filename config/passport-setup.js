@@ -3,7 +3,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const keys = require('./keys');
 const User = require('../models/user-model');
 const jwt = require('jsonwebtoken');
-
+const dotenv=require('dotenv');
 
 passport.serializeUser((user, done) => {
   done(null, user);
@@ -23,7 +23,8 @@ passport.use(
       clientID: keys.google.clientID,
       clientSecret: keys.google.clientSecret,
       // callbackURL: 'https://api.connectify.website/api/googleAuth/redirect'
-      callbackURL:'http://localhost:5002/api/googleAuth/redirect'
+      // callbackURL:'http://localhost:5002/api/googleAuth/redirect'
+      callbackURL:`${process.env.SERVER}/api/googleAuth/redirect`
     },
     (accessToken, refreshToken, profile, done) => {
       // check if user already exists in our own db
