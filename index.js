@@ -266,3 +266,5 @@ server.listen(PORT, () => {
   console.log(process.env.CLIENT);
   console.log(`Server is listening on ${PORT}`);
 });
+
+module.exports = app;
