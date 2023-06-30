@@ -9,11 +9,12 @@ const mongoose = require("mongoose");
 const keys = require("./config/keys");
 const cookieSession = require("cookie-session");
 const User = require('./models/user-model');
-
+const dotenv=require('dotenv');
 const PORT = process.env.PORT || 5002;
 const app = express();
 const server = http.createServer(app);
 
+dotenv.config();
 app.use(cors());
 
 app.use(
@@ -87,11 +88,12 @@ app.get("/api/googleAuth/redirect", passport.authenticate("google", {
   scope: ['profile', 'email']
 }), (req, res) => {
   const { user, token } = req.user;
-  res.cookie("user",user)
+  res.cookie("user",user, { httpOnly: true })
   res.cookie("jwt", token, { httpOnly: true });
 
   // res.redirect(`https://connectify.website/?jwt=${encodeURIComponent(token)}`);
-  res.redirect(`http://localhost:3000/?jwt=${encodeURIComponent(req.user)}`);
+  // console.log(req.user);
+  res.redirect(`${process.env.CLIENT}/?jwt=${encodeURIComponent(token)}&user=${encodeURIComponent(user.username)}`);
 });
 
 
@@ -261,5 +263,6 @@ const directMessageHandler = (data, socket) => {
 };
 
 server.listen(PORT, () => {
+  console.log(process.env.CLIENT);
   console.log(`Server is listening on ${PORT}`);
 });
