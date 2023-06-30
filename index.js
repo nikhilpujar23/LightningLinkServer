@@ -41,6 +41,9 @@ mongoose
   });
 
 // create route to check if room exists
+app.get("/",(req,res)=>{
+  return res.send("Server Up");
+})
 app.get("/api/room-exists/:roomId", (req, res) => {
   const { roomId } = req.params;
   const room = rooms.find((room) => room.id === roomId);
