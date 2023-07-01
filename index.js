@@ -97,7 +97,8 @@ app.get("/api/googleAuth/redirect", passport.authenticate("google", {
 
   // res.redirect(`https://connectify.website/?jwt=${encodeURIComponent(token)}`);
   // console.log(req.user);
-  res.redirect(`${process.env.CLIENT}/?jwt=${encodeURIComponent(token)}&user=${encodeURIComponent(user.username)}`);
+  res.redirect(`https://lightning-link.vercel.app/?jwt=${encodeURIComponent(token)}&user=${encodeURIComponent(user.username)}`);
+  // res.redirect(`${process.env.CLIENT}/?jwt=${encodeURIComponent(token)}&user=${encodeURIComponent(user.username)}`);
 });
 
 
