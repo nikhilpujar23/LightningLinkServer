@@ -101,8 +101,12 @@ app.get("/api/googleAuth/redirect", passport.authenticate("google", {
   // res.redirect(`${process.env.CLIENT}/?jwt=${encodeURIComponent(token)}&user=${encodeURIComponent(user.username)}`);
 });
 
+var  temp = app.listen(PORT, () => {
+  console.log(process.env.CLIENT);
+  console.log(`Server is listening on ${PORT}`);
+});
 
-const io = require("socket.io")(server, {
+const io = require("socket.io")(temp, {
   cors: {
     origin: "*",
     methods: ["GET", "POST"],
@@ -271,9 +275,6 @@ const directMessageHandler = (data, socket) => {
   }
 };
 
-app.listen(PORT, () => {
-  console.log(process.env.CLIENT);
-  console.log(`Server is listening on ${PORT}`);
-});
+
 
 module.exports = app;
