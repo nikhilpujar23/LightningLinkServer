@@ -22,7 +22,7 @@ passport.use(
       scope: ['profile', 'email'],
       clientID: keys.google.clientID,
       clientSecret: keys.google.clientSecret,
-      // callbackURL: 'https://api.connectify.website/api/googleAuth/redirect'
+    
       // callbackURL:'http://localhost:5002/api/googleAuth/redirect'
       callbackURL: 'https://lightning-link-server.onrender.com/api/googleAuth/redirect'
       // callbackURL:`${process.env.SERVER}/api/googleAuth/redirect`

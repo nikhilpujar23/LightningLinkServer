@@ -62,23 +62,23 @@ app.get("/api/room-exists/:roomId", (req, res) => {
   }
 });
 
-// app.get("/api/get-turn-credentials", (req, res) => {
-//   const accountSid = "AC7cff1792ce0f8d410f4790a5048eeeb7";
-//   const authToken = "c9f5e65fe22c2e6764d5ca5530d4970c";
+app.get("/api/get-turn-credentials", (req, res) => {
+  const accountSid = "AC7cff1792ce0f8d410f4790a5048eeeb7";
+  const authToken = "c9f5e65fe22c2e6764d5ca5530d4970c";
 
-//   const client = twilio(accountSid, authToken);
+  const client = twilio(accountSid, authToken);
 
-//   res.send({ token: null });
-//   try {
-//     client.tokens.create().then((token) => {
-//       res.send({ token });
-//     });
-//   } catch (err) {
-//     console.log("error occurred when fetching turn server credentials");
-//     console.log(err);
-//     res.send({ token: null });
-//   }
-// });
+  res.send({ token: null });
+  try {
+    client.tokens.create().then((token) => {
+      res.send({ token });
+    });
+  } catch (err) {
+    console.log("error occurred when fetching turn server credentials");
+    console.log(err);
+    res.send({ token: null });
+  }
+});
 
 //google auth
 app.get(
@@ -95,7 +95,7 @@ app.get("/api/googleAuth/redirect", passport.authenticate("google", {
   res.cookie("user",user, { httpOnly: true })
   res.cookie("jwt", token, { httpOnly: true });
 
-  // res.redirect(`https://connectify.website/?jwt=${encodeURIComponent(token)}`);
+  
   // console.log(req.user);
   res.redirect(`https://lightning-link.vercel.app/?jwt=${encodeURIComponent(token)}&user=${encodeURIComponent(user.username)}`);
   // res.redirect(`${process.env.CLIENT}/?jwt=${encodeURIComponent(token)}&user=${encodeURIComponent(user.username)}`);
