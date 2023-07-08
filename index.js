@@ -102,7 +102,7 @@ app.get("/api/googleAuth/redirect", passport.authenticate("google", {
 });
 
 
-const io = require("socket.io")(server, {
+const io = require("socket.io")(index, {
   cors: {
     origin: "*",
     methods: ["GET", "POST"],
