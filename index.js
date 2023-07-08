@@ -102,11 +102,15 @@ app.get("/api/googleAuth/redirect", passport.authenticate("google", {
 });
 
 
-const io = require("socket.io")(index, {
+const io = require("socket.io")(server, {
   cors: {
     origin: "*",
     methods: ["GET", "POST"],
   },
+});
+
+app.get('/socket.io/socket.io.js', (req, res) => {
+  res.sendFile(__dirname + '/node_modules/socket.io/client-dist/socket.io.js');
 });
 
 io.on("connection", (socket) => {
